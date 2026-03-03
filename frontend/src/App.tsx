@@ -28,7 +28,7 @@ const CARDS: FlashCard[] = [
     cardColor: 'linear-gradient(135deg, #fff0f7 0%, #ffecd2 100%)',
     tagline: '✨ made with lots of love ✨',
     photoPosition: 'center 60%',
-    photoScale: 1.2
+    photoScale: 1.25
   },
   {
     id: 2,
