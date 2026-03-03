@@ -64,11 +64,11 @@ const CARDS: FlashCard[] = [
     photo: 'photo4.jpg',
     decorImage: '/bear_sunflower.png',
     decorAlt: 'Bear with flowers',
-    line: "My favourite adventure is with you 🐾",
-    subline: "I don't care where we go or what we do — as long as you're beside me, it's the best day ever.",
-    accent: '🗺️',
+    line: "Your laugh is my favourite sound 🎵",
+    subline: "Genuinely, I would listen to it on loop forever. Nothing in the world sounds as good as you laughing.",
+    accent: '🎶',
     cardColor: 'linear-gradient(135deg, #e8f5e9 0%, #ffd6e7 100%)',
-    tagline: '🐻 card 04 of 12'
+    tagline: '🌸 card 04 of 12'
   },
   {
     id: 6,
@@ -256,43 +256,43 @@ function PhotoSlot({ photo, alt }: { photo: string | null; alt: string }) {
 // ─── Single Flashcard ─────────────────────────────────────────────────────────
 interface FlashCardProps {
   card: FlashCard
-  isEntering: boolean
-  isExiting: boolean
-  direction: 'forward' | 'back'
-  onClick: (e: React.MouseEvent) => void
+  animState: 'idle' | 'exit-forward' | 'exit-back' | 'enter-forward' | 'enter-back'
+  onClick?: (e: React.MouseEvent) => void
 }
 
-function FlashCardView({ card, isEntering, isExiting, direction, onClick }: FlashCardProps) {
+function FlashCardView({ card, animState, onClick }: FlashCardProps) {
   let animClass = ''
-  if (isExiting) animClass = 'card-exit'
-  else if (isEntering) animClass = 'card-enter'
+  if (animState === 'exit-forward') animClass = 'card-stack-exit-forward'
+  else if (animState === 'exit-back') animClass = 'card-stack-exit-back'
+  else if (animState === 'enter-forward') animClass = 'card-stack-enter-forward'
+  else if (animState === 'enter-back') animClass = 'card-stack-enter-back'
 
   return (
     <div
-      className={`w-full max-w-sm glass-card rounded-3xl cursor-pointer select-none relative overflow-hidden ripple-container ${animClass}`}
-      style={{ background: card.cardColor, animationDirection: direction === 'back' && isEntering ? 'reverse' : 'normal' }}
+      className={`w-full max-w-sm glass-card rounded-3xl cursor-pointer select-none relative overflow-hidden ripple-container card-top ${animClass}`}
+      style={{ background: card.cardColor }}
       onClick={onClick}
     >
       {/* Top tagline */}
-      <div className="flex items-center justify-center pt-5 pb-1">
+      <div className="flex items-center justify-center pt-4 pb-1">
         <span className="font-cute text-pink-400 text-xs font-semibold tracking-widest uppercase opacity-70">
           {card.tagline}
         </span>
       </div>
 
       {/* Decorative top sticker */}
-      <div className="flex justify-center py-2">
+      <div className="flex justify-center py-1">
         <img
           src={card.decorImage}
           alt={card.decorAlt}
           className="sticker"
-          style={{ width: 110, height: 110, objectFit: 'contain' }}
+          style={{ width: 90, height: 90, objectFit: 'contain' }}
         />
       </div>
 
       {/* Photo slot */}
-      <div className="px-6 pb-4">
-        <div className="polaroid mx-auto" style={{ maxWidth: 220 }}>
+      <div className="px-6 pb-3">
+        <div className="polaroid mx-auto" style={{ maxWidth: 200 }}>
           <PhotoSlot photo={card.photo} alt={`Memory on card ${card.id}`} />
           <div className="text-center mt-2">
             <span className="font-handwritten text-gray-400 text-sm">~ us ~</span>
@@ -301,23 +301,23 @@ function FlashCardView({ card, isEntering, isExiting, direction, onClick }: Flas
       </div>
 
       {/* Love line */}
-      <div className="px-7 pb-4 text-center">
-        <p className="font-romantic text-3xl text-pink-600 leading-tight mb-2" style={{ textShadow: '0 1px 4px rgba(255,126,179,0.2)' }}>
+      <div className="px-7 pb-3 text-center">
+        <p className="font-romantic text-2xl text-pink-600 leading-tight mb-1" style={{ textShadow: '0 1px 4px rgba(255,126,179,0.2)' }}>
           {card.line}
         </p>
-        <p className="font-cute text-pink-500 text-sm leading-relaxed opacity-90">
+        <p className="font-cute text-pink-500 text-xs leading-relaxed opacity-90">
           {card.subline}
         </p>
       </div>
 
       {/* Bottom accent */}
-      <div className="flex items-center justify-between px-7 pb-6">
+      <div className="flex items-center justify-between px-7 pb-4">
         <div className="flex gap-1">
           {[0, 1, 2].map(i => (
             <span key={i} className="text-pink-300 text-xs" style={{ animationDelay: `${i * 0.4}s` }}>♥</span>
           ))}
         </div>
-        <span className="text-2xl heartbeat">{card.accent}</span>
+        <span className="text-xl heartbeat">{card.accent}</span>
         <div className="flex gap-1">
           {[0, 1, 2].map(i => (
             <span key={i} className="text-pink-300 text-xs">♥</span>
@@ -425,9 +425,9 @@ function EndScreen({ onRestart }: { onRestart: () => void }) {
         <div className="glass-card rounded-2xl p-6 max-w-sm">
           <p className="font-handwritten text-2xl text-pink-500 mb-3">Dear Sreeparna,</p>
           <p className="font-cute text-pink-500 text-sm leading-relaxed">
-            Thank you for being you. For reading through all of these. For being the reason I smile without even realising it. I love you — more than all the sunflowers and orchids in the world, more than all the plushies, more than I know how to say. 🌻🐻💕
+            Thank you for being you. For reading through all of these. For being the tiny reason behind every smile I didn't even see coming. I love you — more than all the sunflowers and orchids in the world, more than words ever get right, more than you probably know. You make everything softer and sweeter just by existing. 🌻🐻💕
           </p>
-          <p className="font-handwritten text-xl text-pink-400 mt-4">forever yours 💌</p>
+          <p className="font-handwritten text-xl text-pink-400 mt-4">yours, always and always 💌</p>
         </div>
         <div className="flex gap-4 mt-2">
           <button className="btn-cute-secondary" onClick={onRestart} id="restart-btn">
@@ -443,20 +443,31 @@ function EndScreen({ onRestart }: { onRestart: () => void }) {
 export default function App() {
   const [screen, setScreen] = useState<'title' | 'cards' | 'end'>('title')
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isEntering, setIsEntering] = useState(false)
-  const [isExiting, setIsExiting] = useState(false)
-  const [direction, setDirection] = useState<'forward' | 'back'>('forward')
+  // animState: 'idle' | 'exit-forward' | 'exit-back' | 'enter-forward' | 'enter-back'
+  const [animState, setAnimState] = useState<'idle' | 'exit-forward' | 'exit-back' | 'enter-forward' | 'enter-back'>('idle')
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
   const particles = useParticles(18)
-  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const confettiTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Derived: which 3 cards to show in the stack (top, 2nd, 3rd)
+  // During exit animation, show next cards in stack positions 1,2
+  // During enter: new card is at position 0 entering from behind
+  const getStackCards = () => {
+    return [
+      CARDS[currentIndex],
+      CARDS[Math.min(currentIndex + 1, CARDS.length - 1)],
+      CARDS[Math.min(currentIndex + 2, CARDS.length - 1)],
+    ]
+  }
+
+  const isAnimating = animState !== 'idle'
 
   const handleStart = () => {
     setCurrentIndex(0)
-    setIsEntering(true)
+    setAnimState('enter-forward')
     setScreen('cards')
-    setTimeout(() => setIsEntering(false), 600)
-    // Confetti on start
+    setTimeout(() => setAnimState('idle'), 550)
     const pieces = triggerConfetti()
     setConfetti(pieces)
     confettiTimerRef.current = setTimeout(() => setConfetti([]), 4000)
@@ -465,6 +476,7 @@ export default function App() {
   const handleRestart = () => {
     setCurrentIndex(0)
     setScreen('title')
+    setAnimState('idle')
   }
 
   const addRipple = useCallback((e: React.MouseEvent) => {
@@ -480,33 +492,45 @@ export default function App() {
 
   const goNext = useCallback((e: React.MouseEvent) => {
     addRipple(e)
-    if (isExiting || isEntering) return
+    if (isAnimating) return
 
-    setDirection('forward')
-    setIsExiting(true)
-    exitTimerRef.current = setTimeout(() => {
-      setIsExiting(false)
+    setAnimState('exit-forward')
+    timerRef.current = setTimeout(() => {
       if (currentIndex + 1 >= CARDS.length) {
+        setAnimState('idle')
         setScreen('end')
         const pieces = triggerConfetti()
         setConfetti(pieces)
         confettiTimerRef.current = setTimeout(() => setConfetti([]), 4000)
       } else {
         setCurrentIndex(prev => prev + 1)
-        setIsEntering(true)
-        setTimeout(() => setIsEntering(false), 600)
+        setAnimState('enter-forward')
+        setTimeout(() => setAnimState('idle'), 520)
       }
-    }, 420)
-  }, [addRipple, isExiting, isEntering, currentIndex])
+    }, 400)
+  }, [addRipple, isAnimating, currentIndex])
+
+  const goBack = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation()
+    addRipple(e)
+    if (isAnimating || currentIndex === 0) return
+
+    setAnimState('exit-back')
+    timerRef.current = setTimeout(() => {
+      setCurrentIndex(prev => Math.max(0, prev - 1))
+      setAnimState('enter-back')
+      setTimeout(() => setAnimState('idle'), 520)
+    }, 400)
+  }, [addRipple, isAnimating, currentIndex])
 
   useEffect(() => {
     return () => {
-      if (exitTimerRef.current) clearTimeout(exitTimerRef.current)
+      if (timerRef.current) clearTimeout(timerRef.current)
       if (confettiTimerRef.current) clearTimeout(confettiTimerRef.current)
     }
   }, [])
 
-  const card = CARDS[currentIndex]
+  const stackCards = getStackCards()
 
   return (
     <div className="relative">
@@ -557,7 +581,7 @@ export default function App() {
         {screen === 'title' && <TitleScreen onStart={handleStart} />}
 
         {screen === 'cards' && (
-          <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4 gap-5">
+          <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4 gap-4">
             {/* Header */}
             <div className="text-center slide-in-up">
               <p className="font-romantic text-3xl text-pink-500" style={{ textShadow: '0 1px 6px rgba(255,126,179,0.25)' }}>
@@ -569,34 +593,42 @@ export default function App() {
             {/* Progress */}
             <ProgressBar current={currentIndex} total={CARDS.length} />
 
-            {/* Card */}
-            <FlashCardView
-              card={card}
-              isEntering={isEntering}
-              isExiting={isExiting}
-              direction={direction}
-              onClick={goNext}
-            />
+            {/* Stacked card deck */}
+            {(() => {
+              const remaining = CARDS.length - currentIndex - 1
+              return (
+                <div className="card-stack-container">
+                  {/* Back card 2 — deepest in stack (only show if 2+ cards remain) */}
+                  {remaining >= 2 && (
+                    <div
+                      className={`card-back stacked-card-2 ${animState === 'exit-forward' || animState === 'exit-back' ? 'card-stack-rise-2' : ''}`}
+                      style={{ background: CARDS[Math.min(currentIndex + 2, CARDS.length - 1)].cardColor }}
+                    />
+                  )}
+                  {/* Back card 1 — middle of stack (only show if 1+ cards remain) */}
+                  {remaining >= 1 && (
+                    <div
+                      className={`card-back stacked-card-1 ${animState === 'exit-forward' || animState === 'exit-back' ? 'card-stack-rise-1' : ''}`}
+                      style={{ background: CARDS[Math.min(currentIndex + 1, CARDS.length - 1)].cardColor }}
+                    />
+                  )}
+                  {/* Top card — the only one with full content */}
+                  <FlashCardView
+                    card={stackCards[0]}
+                    animState={animState}
+                    onClick={goNext}
+                  />
+                </div>
+              )
+            })()}
 
-            {/* Navigation hint */}
-            <div className="flex items-center gap-8 mt-2">
+            {/* Navigation */}
+            <div className="flex items-center gap-8 mt-1">
               {currentIndex > 0 && (
                 <button
                   className="btn-cute-secondary text-sm px-5 py-2"
                   id="prev-btn"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    addRipple(e)
-                    if (isExiting || isEntering) return
-                    setDirection('back')
-                    setIsExiting(true)
-                    setTimeout(() => {
-                      setIsExiting(false)
-                      setCurrentIndex(prev => Math.max(0, prev - 1))
-                      setIsEntering(true)
-                      setTimeout(() => setIsEntering(false), 600)
-                    }, 420)
-                  }}
+                  onClick={goBack}
                 >
                   ← prev
                 </button>
@@ -605,7 +637,7 @@ export default function App() {
             </div>
 
             {/* Decorative bottom stickers */}
-            <div className="flex gap-4 items-center mt-2 opacity-60">
+            <div className="flex gap-4 items-center mt-1 opacity-60">
               <img src="/orchid_illustration.png" alt="" style={{ width: 36, objectFit: 'contain' }} />
               <span className="text-pink-300 font-handwritten text-2xl">made with ♡</span>
               <img src="/sunflower_bouquet.png" alt="" style={{ width: 36, objectFit: 'contain' }} />
