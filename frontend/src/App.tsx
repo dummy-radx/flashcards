@@ -379,7 +379,7 @@ function FlashCardView({ card, animState, onClick }: FlashCardProps) {
 // ─── Title Screen ──────────────────────────────────────────────────────────────
 function TitleScreen({ onStart }: { onStart: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-dvh title-screen px-4 sm:px-6 pt-16 pb-8 sm:py-12 relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-dvh title-screen px-4 sm:px-6 pt-16 pb-8 sm:py-8 relative overflow-hidden">
       {/* Background card image */}
       <div className="absolute inset-0 opacity-20">
         <img src="/card_background.png" alt="" className="w-full h-full object-cover" />
@@ -455,7 +455,7 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
 
 function EndScreen({ onRestart }: { onRestart: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-dvh px-4 sm:px-6 pt-12 pb-8 sm:py-12 relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-dvh px-4 sm:px-6 pt-16 pb-8 sm:py-8 relative overflow-hidden">
       <div className="relative z-10 flex flex-col items-center gap-5 sm:gap-6 bounce-in text-center">
         <div className="heartbeat">
           <img src="/cover_card.png" alt="Bear" style={{ width: 'clamp(130px, 40vw, 200px)', height: 'clamp(130px, 40vw, 200px)', objectFit: 'contain' }} className="sticker" />
@@ -643,7 +643,7 @@ export default function App() {
         {screen === 'title' && <TitleScreen onStart={handleStart} />}
 
         {screen === 'cards' && (
-          <div className="min-h-dvh flex flex-col items-center justify-start pt-16 pb-4 sm:pt-24 sm:pb-8 px-3 sm:px-4 gap-2 sm:gap-4 overflow-x-hidden overflow-y-auto w-full max-w-[100vw]">
+          <div className="min-h-dvh flex flex-col items-center justify-start pt-24 pb-6 sm:pt-6 sm:pb-8 px-3 sm:px-4 gap-2 sm:gap-4 overflow-x-hidden overflow-y-auto w-full max-w-[100vw]">
             {/* Header */}
             <div className="text-center slide-in-up">
               <p className="font-romantic text-pink-500" style={{ fontSize: 'clamp(1.4rem, 7vw, 2rem)', textShadow: '0 1px 6px rgba(255,126,179,0.25)' }}>
