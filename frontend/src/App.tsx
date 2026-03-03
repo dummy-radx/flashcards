@@ -12,19 +12,23 @@ interface FlashCard {
   accent: string       // emoji accent
   cardColor: string    // tailwind-like gradient class or inline style
   tagline: string      // small tag at top
+  photoPosition?: string // CSS object-position, e.g. 'center 20%'
+  photoScale?: number   // zoom multiplier, e.g. 1.3
 }
 
 const CARDS: FlashCard[] = [
   {
     id: 1,
-    photo: null,
+    photo: 'photo13.jpeg',
     decorImage: '/cover_card.png',
     decorAlt: 'Bear with heart balloon',
     line: "Hey Sreeparna 🐻",
     subline: "This little stack of cards is made just for you — filled with everything I love about us. Click through, my love! 🌻",
     accent: '💌',
     cardColor: 'linear-gradient(135deg, #fff0f7 0%, #ffecd2 100%)',
-    tagline: '✨ made with lots of love ✨'
+    tagline: '✨ made with lots of love ✨',
+    photoPosition: 'center 60%',
+    photoScale: 1.2
   },
   {
     id: 2,
@@ -79,7 +83,9 @@ const CARDS: FlashCard[] = [
     subline: "Whenever the world feels too loud, just being with you feels like home — cozy, warm, and mine.",
     accent: '🤍',
     cardColor: 'linear-gradient(135deg, #fce4ec 0%, #e8d5ff 100%)',
-    tagline: '💜 card 05 of 12'
+    tagline: '💜 card 05 of 12',
+    photoPosition: 'center 65%',
+    photoScale: 1.25
   },
   {
     id: 7,
@@ -90,7 +96,9 @@ const CARDS: FlashCard[] = [
     subline: "The way your eyes light up about the things you care about — I could watch you talk forever.",
     accent: '⭐',
     cardColor: 'linear-gradient(135deg, #fff8e1 0%, #ffd6e7 100%)',
-    tagline: '✨ card 06 of 12'
+    tagline: '✨ card 06 of 12',
+    photoPosition: 'center 45%',
+    photoScale: 1.25
   },
   {
     id: 8,
@@ -112,7 +120,9 @@ const CARDS: FlashCard[] = [
     subline: "Out of everyone in the world, you chose to be with me. That's the most beautiful thing I've ever been given.",
     accent: '💖',
     cardColor: 'linear-gradient(135deg, #fce4ec 0%, #e8f5e9 100%)',
-    tagline: '🌸 card 08 of 12'
+    tagline: '🌸 card 08 of 12',
+    photoPosition: 'center 75%',
+    photoScale: 1.25
   },
   {
     id: 10,
@@ -134,7 +144,9 @@ const CARDS: FlashCard[] = [
     subline: "For every time you kept going when it was hard, for every small win, every brave thing — I see it all and I'm so proud.",
     accent: '🏆',
     cardColor: 'linear-gradient(135deg, #fff9c4 0%, #f3e5f5 100%)',
-    tagline: '💛 card 10 of 12'
+    tagline: '💛 card 10 of 12',
+    photoPosition: 'center 65%',
+    photoScale: 1.25
   },
   {
     id: 12,
@@ -156,18 +168,21 @@ const CARDS: FlashCard[] = [
     subline: "Just seeing you smile from across the room is enough to make the whole day worth it. Always.",
     accent: '🌺',
     cardColor: 'linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%)',
-    tagline: '🌸 card 12 of 12'
+    tagline: '🌸 card 12 of 12',
+    photoPosition: 'center 60%',
+    photoScale: 1.2
   },
   {
     id: 14,
-    photo: null,
+    photo: 'photo14.jpeg',
     decorImage: '/cover_card.png',
     decorAlt: 'Bear with heart',
     line: "Keep this forever, okay? 💝",
     subline: "These words, these feelings — they're all yours. I love you, Sreeparna. Now and always and a bit more than that. 🌻🐻💕",
     accent: '💝',
     cardColor: 'linear-gradient(135deg, #ffd6e7 0%, #e8d5ff 50%, #ffecd2 100%)',
-    tagline: '💝 with love, always'
+    tagline: '💝 with love, always',
+    photoPosition: 'center 30%',
   }
 ]
 
@@ -227,7 +242,7 @@ function triggerConfetti(): ConfettiPiece[] {
 }
 
 // ─── Photo Component ─────────────────────────────────────────────────────────
-function PhotoSlot({ photo, alt }: { photo: string | null; alt: string }) {
+function PhotoSlot({ photo, alt, photoPosition, photoScale }: { photo: string | null; alt: string; photoPosition?: string; photoScale?: number }) {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
 
@@ -258,7 +273,12 @@ function PhotoSlot({ photo, alt }: { photo: string | null; alt: string }) {
       <img
         src={`/${photo}`}
         alt={alt}
-        className={`w-full h-full object-cover object-top transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          objectPosition: photoPosition ?? 'center top',
+          transform: photoScale ? `scale(${photoScale})` : undefined,
+          transformOrigin: photoPosition ? `center ${photoPosition.split(' ')[1] ?? 'top'}` : 'center top',
+        }}
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
       />
@@ -315,7 +335,7 @@ function FlashCardView({ card, animState, onClick }: FlashCardProps) {
       {/* Photo slot */}
       <div className="px-4 sm:px-6 pb-3">
         <div className="polaroid mx-auto" style={{ maxWidth: 'clamp(140px, 50vw, 200px)' }}>
-          <PhotoSlot photo={card.photo} alt={`Memory on card ${card.id}`} />
+          <PhotoSlot photo={card.photo} alt={`Memory on card ${card.id}`} photoPosition={card.photoPosition} photoScale={card.photoScale} />
           <div className="text-center mt-2">
             <span className="font-handwritten text-gray-400 text-sm">~ us ~</span>
           </div>
@@ -444,13 +464,34 @@ function EndScreen({ onRestart }: { onRestart: () => void }) {
         <h2 className="font-romantic text-pink-600" style={{ fontSize: 'clamp(2rem, 10vw, 3.5rem)', textShadow: '0 2px 10px rgba(255,126,179,0.3)' }}>
           The End 💝
         </h2>
-        <div className="glass-card rounded-2xl p-4 sm:p-6 w-full max-w-sm">
-          <p className="font-handwritten text-pink-500 mb-3" style={{ fontSize: 'clamp(1.2rem, 5vw, 1.5rem)' }}>Dear Sreeparna,</p>
-          <p className="font-cute text-pink-500 text-xs sm:text-sm leading-relaxed">
-            Thank you for being you. For reading through all of these. For being the tiny reason behind every smile I didn't even see coming. I love you — more than all the sunflowers and orchids in the world, more than words ever get right, more than you probably know. You make everything softer and sweeter just by existing. 🌻🐻💕
-          </p>
-          <p className="font-handwritten text-pink-400 mt-4" style={{ fontSize: 'clamp(1rem, 4vw, 1.25rem)' }}>yours, always and always 💌</p>
+
+        {/* Photo + letter side by side */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-4 w-full max-w-lg">
+          {/* Photo polaroid */}
+          <div className="polaroid shrink-0 self-center" style={{ width: 'clamp(130px, 38vw, 175px)' }}>
+            <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src="/photo15.jpeg"
+                alt="Us"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center 40%' }}
+              />
+            </div>
+            <div className="text-center mt-2">
+              <span className="font-handwritten text-gray-400 text-sm">~ us ~</span>
+            </div>
+          </div>
+
+          {/* Letter */}
+          <div className="glass-card rounded-2xl p-4 sm:p-5 flex-1 text-left">
+            <p className="font-handwritten text-pink-500 mb-3" style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.35rem)' }}>Dear Sreeparna,</p>
+            <p className="font-cute text-pink-500 text-xs sm:text-sm leading-relaxed">
+              Thank you for being you. For reading through all of these. For being the tiny reason behind every smile I didn't even see coming. I love you — more than all the sunflowers and orchids in the world, more than words ever get right, more than you probably know. You make everything softer and sweeter just by existing. 🌻🐻💕
+            </p>
+            <p className="font-handwritten text-pink-400 mt-4" style={{ fontSize: 'clamp(0.95rem, 3.5vw, 1.15rem)' }}>yours, always and always 💌</p>
+          </div>
         </div>
+
         <div className="flex gap-4 mt-2">
           <button className="btn-cute-secondary" onClick={onRestart} id="restart-btn">
             🔁 Read Again
