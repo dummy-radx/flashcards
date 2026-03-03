@@ -453,7 +453,6 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
   )
 }
 
-// ─── End Screen ───────────────────────────────────────────────────────────────
 function EndScreen({ onRestart }: { onRestart: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 py-10 sm:py-12 relative overflow-hidden">
