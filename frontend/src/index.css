@@ -25,6 +25,7 @@ body {
   background: linear-gradient(135deg, #ffd6e7 0%, #ffecd2 30%, #e8d5ff 60%, #ffd6e7 100%);
   background-attachment: fixed;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
@@ -495,6 +496,31 @@ body {
 @media (max-height: 700px) and (orientation: portrait) {
   .polaroid {
     padding: 6px 6px 24px 6px;
+  }
+}
+
+@media (max-height: 660px) and (orientation: portrait) {
+  /* Extremely short viewports (like iPhone SE + browser chrome) */
+  .card-top {
+    padding-bottom: 2px !important;
+  }
+  .glass-card p {
+    margin-bottom: 2px !important;
+  }
+  .polaroid {
+    max-width: clamp(100px, 45vw, 150px) !important;
+    padding: 4px 4px 18px 4px;
+  }
+  .sticker {
+    max-height: 50px !important;
+    max-width: 50px !important;
+  }
+  .font-romantic {
+    font-size: min(1.2rem, 6vw) !important;
+  }
+  .font-cute {
+    font-size: min(0.65rem, 3.5vw) !important;
+    line-height: normal;
   }
 }
 
