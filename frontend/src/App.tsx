@@ -28,7 +28,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 2,
-    photo: 'photo1.jpg',
+    photo: 'photo1.jpeg',
     decorImage: '/bear_sunflower.png',
     decorAlt: 'Cute bear with sunflowers',
     line: "You are my sunshine 🌻",
@@ -39,7 +39,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 3,
-    photo: 'photo2.jpg',
+    photo: 'photo2.jpeg',
     decorImage: '/orchid_illustration.png',
     decorAlt: 'Pink orchids',
     line: "You're as rare as an orchid 🌸",
@@ -50,7 +50,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 4,
-    photo: 'photo3.jpg',
+    photo: 'photo3.jpeg',
     decorImage: '/sunflower_bouquet.png',
     decorAlt: 'Sunflower bouquet',
     line: "I'd pick you every single time 💐",
@@ -61,7 +61,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 5,
-    photo: 'photo4.jpg',
+    photo: 'photo4.jpeg',
     decorImage: '/bear_sunflower.png',
     decorAlt: 'Bear with flowers',
     line: "Your laugh is my favourite sound 🎵",
@@ -72,7 +72,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 6,
-    photo: 'photo5.jpg',
+    photo: 'photo5.jpeg',
     decorImage: '/orchid_illustration.png',
     decorAlt: 'Orchid flowers',
     line: "You're my safe place 🏡",
@@ -83,7 +83,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 7,
-    photo: 'photo6.jpg',
+    photo: 'photo6.jpeg',
     decorImage: '/sunflower_bouquet.png',
     decorAlt: 'Sunflowers',
     line: "I love how you love things ✨",
@@ -94,18 +94,18 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 8,
-    photo: 'photo7.jpg',
+    photo: 'photo7.jpeg',
     decorImage: '/bear_sunflower.png',
     decorAlt: 'Cute bear',
-    line: "Even my bear is jealous 🧸",
-    subline: "Because every hug from a plushie reminds me it's not as warm, soft, or perfect as yours.",
+    line: "You make everything cuter just by being near it 🧸",
+    subline: "Stuffed animals, rainy days, old songs — somehow everything gets a little softer and sweeter the moment you're around.",
     accent: '🧸',
     cardColor: 'linear-gradient(135deg, #fff3e0 0%, #ffd6e7 100%)',
     tagline: '🐻 card 07 of 12'
   },
   {
     id: 9,
-    photo: 'photo8.jpg',
+    photo: 'photo8.jpeg',
     decorImage: '/orchid_illustration.png',
     decorAlt: 'Orchid bloom',
     line: "Thank you for choosing me 🫶",
@@ -116,7 +116,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 10,
-    photo: 'photo9.jpg',
+    photo: 'photo9.jpeg',
     decorImage: '/sunflower_bouquet.png',
     decorAlt: 'Sunflower bouquet',
     line: "You make ordinary days magical 🌈",
@@ -127,7 +127,7 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 11,
-    photo: 'photo10.jpg',
+    photo: 'photo10.jpeg',
     decorImage: '/bear_sunflower.png',
     decorAlt: 'Bear and sunflowers',
     line: "I'm so proud of you 🌟",
@@ -138,6 +138,28 @@ const CARDS: FlashCard[] = [
   },
   {
     id: 12,
+    photo: 'photo11.jpeg',
+    decorImage: '/orchid_illustration.png',
+    decorAlt: 'Orchid bloom',
+    line: "You're still my favourite adventure 🌍",
+    subline: "Every moment with you is something I want to bottle up and keep forever. You make everywhere feel like somewhere worth being.",
+    accent: '🗺️',
+    cardColor: 'linear-gradient(135deg, #e0f7fa 0%, #fce4ec 100%)',
+    tagline: '🌍 card 11 of 12'
+  },
+  {
+    id: 13,
+    photo: 'photo12.jpeg',
+    decorImage: '/sunflower_bouquet.png',
+    decorAlt: 'Sunflower bouquet',
+    line: "You make my world brighter 🌸",
+    subline: "Just seeing you smile from across the room is enough to make the whole day worth it. Always.",
+    accent: '🌺',
+    cardColor: 'linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%)',
+    tagline: '🌸 card 12 of 12'
+  },
+  {
+    id: 14,
     photo: null,
     decorImage: '/cover_card.png',
     decorAlt: 'Bear with heart',
@@ -145,7 +167,7 @@ const CARDS: FlashCard[] = [
     subline: "These words, these feelings — they're all yours. I love you, Sreeparna. Now and always and a bit more than that. 🌻🐻💕",
     accent: '💝',
     cardColor: 'linear-gradient(135deg, #ffd6e7 0%, #e8d5ff 50%, #ffecd2 100%)',
-    tagline: '💝 card 12 of 12'
+    tagline: '💝 with love, always'
   }
 ]
 
@@ -236,7 +258,7 @@ function PhotoSlot({ photo, alt }: { photo: string | null; alt: string }) {
       <img
         src={`/${photo}`}
         alt={alt}
-        className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-cover object-top transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
       />
