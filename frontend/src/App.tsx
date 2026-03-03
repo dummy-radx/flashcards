@@ -286,13 +286,13 @@ function FlashCardView({ card, animState, onClick }: FlashCardProps) {
           src={card.decorImage}
           alt={card.decorAlt}
           className="sticker"
-          style={{ width: 90, height: 90, objectFit: 'contain' }}
+          style={{ width: 'clamp(60px, 20vw, 90px)', height: 'clamp(60px, 20vw, 90px)', objectFit: 'contain' }}
         />
       </div>
 
       {/* Photo slot */}
-      <div className="px-6 pb-3">
-        <div className="polaroid mx-auto" style={{ maxWidth: 200 }}>
+      <div className="px-4 sm:px-6 pb-3">
+        <div className="polaroid mx-auto" style={{ maxWidth: 'clamp(140px, 50vw, 200px)' }}>
           <PhotoSlot photo={card.photo} alt={`Memory on card ${card.id}`} />
           <div className="text-center mt-2">
             <span className="font-handwritten text-gray-400 text-sm">~ us ~</span>
@@ -301,23 +301,23 @@ function FlashCardView({ card, animState, onClick }: FlashCardProps) {
       </div>
 
       {/* Love line */}
-      <div className="px-7 pb-3 text-center">
-        <p className="font-romantic text-2xl text-pink-600 leading-tight mb-1" style={{ textShadow: '0 1px 4px rgba(255,126,179,0.2)' }}>
+      <div className="px-4 sm:px-7 pb-3 text-center">
+        <p className="font-romantic text-pink-600 leading-tight mb-1" style={{ fontSize: 'clamp(1.1rem, 5.5vw, 1.5rem)', textShadow: '0 1px 4px rgba(255,126,179,0.2)' }}>
           {card.line}
         </p>
-        <p className="font-cute text-pink-500 text-xs leading-relaxed opacity-90">
+        <p className="font-cute text-pink-500 leading-relaxed opacity-90" style={{ fontSize: 'clamp(0.68rem, 2.8vw, 0.75rem)' }}>
           {card.subline}
         </p>
       </div>
 
       {/* Bottom accent */}
-      <div className="flex items-center justify-between px-7 pb-4">
+      <div className="flex items-center justify-between px-4 sm:px-7 pb-4">
         <div className="flex gap-1">
           {[0, 1, 2].map(i => (
             <span key={i} className="text-pink-300 text-xs" style={{ animationDelay: `${i * 0.4}s` }}>♥</span>
           ))}
         </div>
-        <span className="text-xl heartbeat">{card.accent}</span>
+        <span className="text-lg sm:text-xl heartbeat">{card.accent}</span>
         <div className="flex gap-1">
           {[0, 1, 2].map(i => (
             <span key={i} className="text-pink-300 text-xs">♥</span>
@@ -350,43 +350,43 @@ function TitleScreen({ onStart }: { onStart: () => void }) {
             src="/bear_sunflower.png"
             alt="Cute bear"
             className="sticker"
-            style={{ width: 180, height: 180, objectFit: 'contain' }}
+            style={{ width: 'clamp(120px, 40vw, 180px)', height: 'clamp(120px, 40vw, 180px)', objectFit: 'contain' }}
           />
         </div>
 
         {/* Main title */}
         <div className="text-center">
-          <p className="font-cute text-pink-400 text-sm tracking-widest uppercase mb-2 opacity-70">
+          <p className="font-cute text-pink-400 text-xs sm:text-sm tracking-widest uppercase mb-2 opacity-70">
             ✦ a love letter in cards ✦
           </p>
-          <h1 className="font-romantic text-6xl text-pink-600 leading-tight" style={{ textShadow: '0 2px 12px rgba(255,126,179,0.3)' }}>
+          <h1 className="font-romantic text-pink-600 leading-tight" style={{ fontSize: 'clamp(2.5rem, 12vw, 4rem)', textShadow: '0 2px 12px rgba(255,126,179,0.3)' }}>
             For Sreeparna
           </h1>
-          <p className="font-handwritten text-pink-400 text-2xl mt-2">
+          <p className="font-handwritten text-pink-400 mt-2" style={{ fontSize: 'clamp(1.2rem, 5vw, 1.5rem)' }}>
             with love, always 🐻💕
           </p>
         </div>
 
         {/* Description */}
-        <div className="glass-card rounded-2xl p-5 max-w-xs text-center" style={{ background: 'rgba(255,255,255,0.65)' }}>
-          <p className="font-cute text-pink-500 text-sm leading-relaxed">
+        <div className="glass-card rounded-2xl p-4 sm:p-5 w-full max-w-xs text-center" style={{ background: 'rgba(255,255,255,0.65)' }}>
+          <p className="font-cute text-pink-500 text-xs sm:text-sm leading-relaxed">
             12 little cards made just for you 🌻 Each one has a memory and a word from my heart. Click through slowly, okay? 💌
           </p>
         </div>
 
         {/* Decorative flowers row */}
-        <div className="flex gap-3 items-center">
-          <img src="/orchid_illustration.png" alt="" style={{ width: 48, height: 48, objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
-          <img src="/sunflower_bouquet.png" alt="" style={{ width: 56, height: 56, objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
-          <img src="/orchid_illustration.png" alt="" style={{ width: 48, height: 48, objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
+        <div className="flex gap-2 sm:gap-3 items-center">
+          <img src="/orchid_illustration.png" alt="" style={{ width: 'clamp(32px, 10vw, 48px)', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
+          <img src="/sunflower_bouquet.png" alt="" style={{ width: 'clamp(36px, 12vw, 56px)', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
+          <img src="/orchid_illustration.png" alt="" style={{ width: 'clamp(32px, 10vw, 48px)', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
         </div>
 
         {/* Start button */}
-        <button className="btn-cute text-lg px-10 py-4" onClick={onStart} id="start-btn">
+        <button className="btn-cute" onClick={onStart} id="start-btn" style={{ fontSize: 'clamp(0.95rem, 4vw, 1.125rem)', padding: 'clamp(10px, 3vw, 16px) clamp(20px, 7vw, 40px)' }}>
           Open My Cards 💝
         </button>
 
-        <p className="font-handwritten text-pink-400 text-lg opacity-60">~ tap to unwrap ~</p>
+        <p className="font-handwritten text-pink-400 text-base sm:text-lg opacity-60">~ tap to unwrap ~</p>
       </div>
     </div>
   )
@@ -414,20 +414,20 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
 // ─── End Screen ───────────────────────────────────────────────────────────────
 function EndScreen({ onRestart }: { onRestart: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 py-12 relative overflow-hidden">
-      <div className="relative z-10 flex flex-col items-center gap-6 bounce-in text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 py-10 sm:py-12 relative overflow-hidden">
+      <div className="relative z-10 flex flex-col items-center gap-5 sm:gap-6 bounce-in text-center">
         <div className="heartbeat">
-          <img src="/cover_card.png" alt="Bear" style={{ width: 200, height: 200, objectFit: 'contain' }} className="sticker" />
+          <img src="/cover_card.png" alt="Bear" style={{ width: 'clamp(130px, 40vw, 200px)', height: 'clamp(130px, 40vw, 200px)', objectFit: 'contain' }} className="sticker" />
         </div>
-        <h2 className="font-romantic text-5xl text-pink-600" style={{ textShadow: '0 2px 10px rgba(255,126,179,0.3)' }}>
+        <h2 className="font-romantic text-pink-600" style={{ fontSize: 'clamp(2rem, 10vw, 3.5rem)', textShadow: '0 2px 10px rgba(255,126,179,0.3)' }}>
           The End 💝
         </h2>
-        <div className="glass-card rounded-2xl p-6 max-w-sm">
-          <p className="font-handwritten text-2xl text-pink-500 mb-3">Dear Sreeparna,</p>
-          <p className="font-cute text-pink-500 text-sm leading-relaxed">
+        <div className="glass-card rounded-2xl p-4 sm:p-6 w-full max-w-sm">
+          <p className="font-handwritten text-pink-500 mb-3" style={{ fontSize: 'clamp(1.2rem, 5vw, 1.5rem)' }}>Dear Sreeparna,</p>
+          <p className="font-cute text-pink-500 text-xs sm:text-sm leading-relaxed">
             Thank you for being you. For reading through all of these. For being the tiny reason behind every smile I didn't even see coming. I love you — more than all the sunflowers and orchids in the world, more than words ever get right, more than you probably know. You make everything softer and sweeter just by existing. 🌻🐻💕
           </p>
-          <p className="font-handwritten text-xl text-pink-400 mt-4">yours, always and always 💌</p>
+          <p className="font-handwritten text-pink-400 mt-4" style={{ fontSize: 'clamp(1rem, 4vw, 1.25rem)' }}>yours, always and always 💌</p>
         </div>
         <div className="flex gap-4 mt-2">
           <button className="btn-cute-secondary" onClick={onRestart} id="restart-btn">
@@ -581,13 +581,13 @@ export default function App() {
         {screen === 'title' && <TitleScreen onStart={handleStart} />}
 
         {screen === 'cards' && (
-          <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4 gap-4">
+          <div className="min-h-screen flex flex-col items-center justify-start py-5 sm:py-8 px-3 sm:px-4 gap-3 sm:gap-4">
             {/* Header */}
             <div className="text-center slide-in-up">
-              <p className="font-romantic text-3xl text-pink-500" style={{ textShadow: '0 1px 6px rgba(255,126,179,0.25)' }}>
+              <p className="font-romantic text-pink-500" style={{ fontSize: 'clamp(1.4rem, 7vw, 2rem)', textShadow: '0 1px 6px rgba(255,126,179,0.25)' }}>
                 For my Sreeparna 🌸
               </p>
-              <p className="font-handwritten text-pink-400 text-lg opacity-70">flip through our little love story</p>
+              <p className="font-handwritten text-pink-400 text-base opacity-70">flip through our little love story</p>
             </div>
 
             {/* Progress */}
@@ -637,10 +637,10 @@ export default function App() {
             </div>
 
             {/* Decorative bottom stickers */}
-            <div className="flex gap-4 items-center mt-1 opacity-60">
-              <img src="/orchid_illustration.png" alt="" style={{ width: 36, objectFit: 'contain' }} />
-              <span className="text-pink-300 font-handwritten text-2xl">made with ♡</span>
-              <img src="/sunflower_bouquet.png" alt="" style={{ width: 36, objectFit: 'contain' }} />
+            <div className="flex gap-3 items-center mt-1 opacity-60">
+              <img src="/orchid_illustration.png" alt="" style={{ width: 'clamp(24px, 8vw, 36px)', objectFit: 'contain' }} />
+              <span className="text-pink-300 font-handwritten" style={{ fontSize: 'clamp(1rem, 5vw, 1.5rem)' }}>made with ♡</span>
+              <img src="/sunflower_bouquet.png" alt="" style={{ width: 'clamp(24px, 8vw, 36px)', objectFit: 'contain' }} />
             </div>
           </div>
         )}

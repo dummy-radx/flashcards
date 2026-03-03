@@ -146,6 +146,8 @@ body {
   position: relative;
   width: 100%;
   max-width: 384px;
+  /* Ensure it never gets tiny on small phones */
+  min-width: 0;
 }
 
 /* Active top card — sits in normal flow to give the container height */
@@ -426,4 +428,79 @@ body {
 ::selection {
   background: #ffb3d1;
   color: #fff;
+}
+
+/* ─── Responsive: small phones (≤ 480px) ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .polaroid {
+    padding: 8px 8px 28px 8px;
+  }
+
+  .btn-cute {
+    padding: 12px 24px;
+    font-size: 0.93rem;
+  }
+
+  .btn-cute-secondary {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Reduce progress dot size slightly */
+  .progress-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Keep the card stack contained within viewport with a small safe margin */
+  .card-stack-container {
+    max-width: calc(100vw - 32px);
+  }
+
+  /* Reduce the stacked card offsets on small screens so they don't overflow */
+  .stacked-card-1 {
+    transform: translateY(10px) scale(0.95) rotate(1deg);
+  }
+
+  .stacked-card-2 {
+    transform: translateY(20px) scale(0.90) rotate(-1.5deg);
+  }
+}
+
+/* ─── Responsive: very small phones (≤ 360px) ─────────────────────────────── */
+@media (max-width: 360px) {
+  .btn-cute {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+
+  .btn-cute-secondary {
+    padding: 8px 16px;
+    font-size: 0.83rem;
+  }
+
+  .card-stack-container {
+    max-width: calc(100vw - 24px);
+  }
+}
+
+/* ─── Responsive: tablets & medium screens (481px – 768px) ────────────────── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .card-stack-container {
+    max-width: min(384px, calc(100vw - 48px));
+  }
+}
+
+/* ─── Tall screens / phones in landscape: prevent overflow ───────────────── */
+@media (max-height: 700px) and (orientation: portrait) {
+  .polaroid {
+    padding: 6px 6px 24px 6px;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  /* In landscape on a phone, allow the page to scroll naturally */
+  body {
+    overflow-y: auto;
+  }
 }
